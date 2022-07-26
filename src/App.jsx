@@ -1,11 +1,21 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+import { Routes, Route } from 'react-router-dom';
+import rootRoutes from './routes';
 
 const App = () => {
   return (
-    <div>
-      <Button variant="contained">Text</Button>
-    </div>
+    <Routes>
+      {rootRoutes.map((item, index) => {
+        return (
+          <Route
+            path={item.path}
+            element={item.element}
+            key={index}
+            caseSensitive
+          />
+        );
+      })}
+    </Routes>
   );
 };
 
