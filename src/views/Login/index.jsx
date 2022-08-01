@@ -1,20 +1,21 @@
 import React from 'react';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   Typography,
-  Avatar,
   Button,
   TextField,
   Link,
   Paper,
   Box,
   Grid,
+  CircularProgress,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
 
 const Login = () => {
+  const isLoading = false;
+
   const validationSchema = yup.object({
     email: yup
       .string('Enter your email')
@@ -37,6 +38,23 @@ const Login = () => {
     },
   });
 
+  if (isLoading) {
+    return (
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+          <CircularProgress color="primary" />
+        </Box>
+      </Grid>
+    );
+  }
+
   return (
     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
       <Box
@@ -47,9 +65,6 @@ const Login = () => {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
-        <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-          <LockOutlinedIcon />
-        </Avatar>
         <Typography component="h1" variant="h5">
           Login
         </Typography>
