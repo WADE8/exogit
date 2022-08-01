@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Typography,
   Button,
@@ -10,11 +10,16 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
+import { loginAction } from '../../store/actions/auth';
+import './styles.scss';
 
 const Login = () => {
-  const isLoading = false;
+  const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   const validationSchema = yup.object({
     email: yup
@@ -34,7 +39,7 @@ const Login = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(loginAction(values.email, values.password));
     },
   });
 
